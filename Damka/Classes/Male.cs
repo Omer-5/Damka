@@ -71,16 +71,33 @@ namespace Damka.Classes
             {
                 if (isValidMove(startIndex, startIndex - 7))
                 {
-                    if (board[startIndex -7].Image == null)
-                    { // black can go right
+                    if (board[startIndex - 7].Image == null)
+                    { // White can go left
                         result.Add(startIndex - 7);
                     }
                     else
                     {
-                        if (isValidMove(startIndex - 9, startIndex -18))
+                        if (isValidMove(startIndex - 7, startIndex - 14))
+                        {
+                            if (board[startIndex - 14].Image == null)
+                            { // White can eat left
+                                result.Add(startIndex - 14);
+                            }
+                        }
+                    }
+                }
+                if (isValidMove(startIndex, startIndex - 9))
+                {
+                    if (board[startIndex - 9].Image == null)
+                    { // White can go right
+                        result.Add(startIndex - 9);
+                    }
+                    else
+                    {
+                        if (isValidMove(startIndex - 9, startIndex - 18))
                         {
                             if (board[startIndex - 18].Image == null)
-                            { // black can eat left
+                            { // White can eat right
                                 result.Add(startIndex - 18);
                             }
                         }

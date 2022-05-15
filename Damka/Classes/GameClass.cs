@@ -10,7 +10,7 @@ namespace Damka.Classes
 {
     class GameClass
     {
-        private int turnCounter;
+        private int _turnCounter;
         //decides what gamephase the user has chosen : 0 is character selection , 1 is for position selection
         private Constants.GamePhase _gamePhase;
         private List<Button> _board;
@@ -72,48 +72,49 @@ namespace Damka.Classes
             else
             {
                 // Logic here
-                //gameEnded(); // ******* TODO
                 _gamePhase = Constants.GamePhase.CharacterSelection;
                 ShowAvailablePieces();
             }
-            disableAllButtons();
-            turnCounter++;
         }
 
         public void playerMoved(int pressedIndex)
         {
             //Logic here
+                _board[pressedIndex].Image = _board[_current_player_index].Image;
+                _board[_current_player_index].Image = null;
 
-            _board[pressedIndex].Image = _board[_current_player_index].Image;
-            _board[_current_player_index].Image = null;
-
-            if (turnCounter % 2 == (int)Constants.PlayerColor.Black)
-            {
-                foreach (Male piece in _blacks)
+                if (_turnCounter % 2 == (int)Constants.PlayerColor.Black)
                 {
-                    if (piece.getIndex() == _current_player_index)
+                    foreach (Male piece in _blacks)
                     {
-                        piece.setByIndex(pressedIndex);
-                        break;
+                        if (piece.getIndex() == _current_player_index)
+                        {
+                            piece.setByIndex(pressedIndex);
+                            break;
+                        }
                     }
                 }
-            }
-            else
-            {
-                foreach (Male piece in _whites)
+                else
                 {
-                    if (piece.getIndex() == _current_player_index)
+                    foreach (Male piece in _whites)
                     {
-                        piece.setByIndex(pressedIndex);
-                        break;
+                        if (piece.getIndex() == _current_player_index)
+                        {
+                            piece.setByIndex(pressedIndex);
+                            break;
+                        }
                     }
                 }
-            }
-            _current_player_index = pressedIndex;
-            _board[pressedIndex].Text = "I have been here";
-
-            nextGamePhase();
+                _board[_current_player_index].BackColor = Constants.DARK_BROWN;
+                _current_player_index = pressedIndex;
+                _turnCounter++;
+                disableAllButtons();
+                ShowAvailablePieces();
+                nextGamePhase();
         }
+
+
+
         //A Specific player has been pressed event
         public void playerSelectedPiece(int pressedIndex)
         {
@@ -147,14 +148,14 @@ namespace Damka.Classes
             foreach (int move in moves)
             {
                 _board[move].Enabled = true;
-                // _board[move].Text = "click me";
+                /*_board[move].BackColor = Color.Yellow;*/
 
             }
         }
         //shows the legal moves for a piece to make
         public void ShowAvailablePieces()
         {
-            if (turnCounter % 2 == (int)Constants.PlayerColor.Black)
+            if (_turnCounter % 2 == (int)Constants.PlayerColor.Black)
             {
                 foreach (Male piece in _blacks)
                 {
@@ -175,14 +176,13 @@ namespace Damka.Classes
         // Enables all the buttons the piece can move to
         private void ShowAvailableMoves()
         {
-            int playerInList = 0;
             List<int> moves;
-
-            if (turnCounter % 2 == (int)Constants.PlayerColor.Black)
+            //enables all whites
+            MessageBox.Show( _turnCounter+ "");
+            if (_turnCounter % 2 == (int)Constants.PlayerColor.Black)
             {
                 foreach (Male piece in _blacks)
                 {
-                    playerInList++;
                     if (piece.getIndex() == _current_player_index)
                     {
                         moves = piece.getAvailableMoves(_board, _current_player_index);
@@ -191,11 +191,11 @@ namespace Damka.Classes
                     }
                 }
             }
+            //enables all blacks
             else
             {
                 foreach (Male piece in _whites)
                 {
-                    playerInList++;
                     if (piece.getIndex() == _current_player_index)
                     {
                         moves = piece.getAvailableMoves(_board, _current_player_index);

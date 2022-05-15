@@ -47,9 +47,9 @@ namespace Damka
                     btn.FlatStyle = FlatStyle.Flat;
                     btn.FlatAppearance.BorderSize = 0;
                     if ((row + col) % 2 == 0)
-                        btn.BackColor = Constants.LIGHT_BROWN;
-                    else
                         btn.BackColor = Constants.DARK_BROWN;
+                    else
+                        btn.BackColor = Constants.LIGHT_BROWN;
                     btn.Click += new EventHandler(boardClick);
                     gamePanel.Controls.Add(btn);
                     game.addButtonToBoard(btn);
