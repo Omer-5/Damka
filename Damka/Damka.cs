@@ -66,14 +66,10 @@ namespace Damka
             int pressedIndex = int.Parse(((Button)sender).Name);
             if (game.getCurrentGamePhase() == Constants.GamePhase.CharacterSelection)
             { // CharacterSelection
-
-                MessageBox.Show("Moves");
                 game.playerMoved(pressedIndex);
             }
             else
             { // PostionSelection
-
-                MessageBox.Show("Pieces");
                 game.playerSelectedPiece(pressedIndex);
             }
         }

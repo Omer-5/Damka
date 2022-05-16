@@ -114,7 +114,7 @@ namespace Damka.Classes
                     }
                     else
                     {
-                        if(isValidMove(startIndex+7, startIndex + 14))
+                        if (isValidMove(startIndex + 7, startIndex + 14))
                         {
                             if (board[startIndex + 14].Image == null)
                             { // White can eat left
@@ -143,7 +143,7 @@ namespace Damka.Classes
             }
             return result;
         }
-        public bool isValidMove(int startIndex,int desiredLocationIndex)
+        public bool isValidMove(int startIndex, int desiredLocationIndex)
         {
             if (startIndex % Constants.NUM_OF_COLS == 0 && desiredLocationIndex % 8 == 7) return false;
             if (startIndex % Constants.NUM_OF_COLS == 7 && desiredLocationIndex % 8 == 0) return false;

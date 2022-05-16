@@ -178,7 +178,6 @@ namespace Damka.Classes
         {
             List<int> moves;
             //enables all whites
-            MessageBox.Show( _turnCounter+ "");
             if (_turnCounter % 2 == (int)Constants.PlayerColor.Black)
             {
                 foreach (Male piece in _blacks)
